@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Prediksi</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            padding:40px;
+            overflow-x:hidden;
+
+            background:linear-gradient(
+                -45deg,
+                #1b5e20,
+                #2e7d32,
+                #43a047,
+                #66bb6a
+            );
+
+            background-size:400% 400%;
+            animation:gradientMove 10s ease infinite;
+        }
+
+        @keyframes gradientMove{
+            0%{background-position:0% 50%;}
+            50%{background-position:100% 50%;}
+            100%{background-position:0% 50%;}
+        }
+
+        .leaf{
+            position:fixed;
+            font-size:50px;
+            opacity:0.15;
+            animation:floatLeaf 15s linear infinite;
+            z-index:0;
+        }
+
+        .leaf:nth-child(1){
+            left:10%;
+            animation-duration:12s;
+        }
+
+        .leaf:nth-child(2){
+            left:50%;
+            animation-duration:18s;
+        }
+
+        .leaf:nth-child(3){
+            left:80%;
+            animation-duration:15s;
+        }
+
+        @keyframes floatLeaf{
+            from{
+                transform:translateY(110vh) rotate(0deg);
+            }
+            to{
+                transform:translateY(-120px) rotate(360deg);
+            }
+        }
+
+        .container{
+            max-width:1400px;
+            margin:auto;
+            position:relative;
+            z-index:1;
+        }
+
+        .result-card{
+
+            display:flex;
+            gap:40px;
+
+            background:rgba(255,255,255,0.15);
+
+            backdrop-filter:blur(20px);
+            -webkit-backdrop-filter:blur(20px);
+
+            border:1px solid rgba(255,255,255,0.2);
+
+            border-radius:30px;
+
+            padding:30px;
+
+            box-shadow:0 15px 40px rgba(0,0,0,0.2);
+
+            animation:fadeUp 1s ease;
+        }
+
+        @keyframes fadeUp{
+            from{
+                opacity:0;
+                transform:translateY(40px);
+            }
+            to{
+                opacity:1;
+                transform:translateY(0);
+            }
+        }
+
+        .image-section{
+            flex:1;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .image-section img{
+            width:100%;
+            max-height:650px;
+            object-fit:cover;
+            border-radius:20px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .info-section{
+            flex:2;
+        }
+
+        .badge{
+            display:inline-block;
+            padding:8px 18px;
+            background:rgba(255,255,255,0.2);
+            color:white;
+            border-radius:30px;
+            margin-bottom:15px;
+            font-weight:bold;
+        }
+
+        h1{
+            color:white;
+            font-size:40px;
+            margin-bottom:20px;
+        }
+
+        h3{
+            color:#f1f8e9;
+            margin-top:25px;
+            margin-bottom:10px;
+        }
+
+        p{
+            color:white;
+            line-height:1.8;
+            text-align:justify;
+        }
+
+        .confidence-text{
+            color:white;
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+
+        .confidence-bar{
+            width:100%;
+            height:30px;
+            background:rgba(255,255,255,0.2);
+            border-radius:50px;
+            overflow:hidden;
+            margin-bottom:25px;
+        }
+
+        .confidence-fill{
+            height:100%;
+            background:linear-gradient(
+                90deg,
+                #00c853,
+                #69f0ae
+            );
+
+            text-align:center;
+            color:white;
+            font-weight:bold;
+            line-height:30px;
+        }
+
+        .info-box{
+            background:rgba(255,255,255,0.12);
+            border-left:5px solid #69f0ae;
+            padding:15px;
+            border-radius:10px;
+        }
+
+        .back-btn{
+            display:inline-block;
+            margin-top:30px;
+            padding:14px 30px;
+
+            background:white;
+            color:#2e7d32;
+
+            text-decoration:none;
+            font-weight:bold;
+
+            border-radius:15px;
+
+            transition:0.3s;
+        }
+
+        .back-btn:hover{
+            transform:translateY(-4px);
+        }
+
+        @media(max-width:900px){
+
+            body{
+                padding:20px;
+            }
+
+            .result-card{
+                flex-direction:column;
+            }
+
+            .image-section img{
+                max-height:350px;
+            }
+
+            h1{
+                font-size:30px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="leaf">🍃</div>
+    <div class="leaf">🍃</div>
+    <div class="leaf">🍃</div>
+
+    <div class="container">
+
+        <div class="result-card">
+
+            <div class="image-section">
+                <img src="{{ image_path }}" alt="Daun Mangga">
+            </div>
+
+            <div class="info-section">
+
+                <div class="badge">
+                    🌿 Hasil Deteksi Penyakit Daun Mangga
+                </div>
+
+                <h1>{{ disease_name }}</h1>
+
+                <div class="confidence-text">
+                    Tingkat Kepercayaan Model AI
+                </div>
+
+                <div class="confidence-bar">
+                    <div class="confidence-fill"
+                         style="width: {{ confidence }}%;">
+                        {{ confidence }}%
+                    </div>
+                </div>
+
+                <h3>📖 Deskripsi Penyakit</h3>
+
+                <div class="info-box">
+                    <p>{{ disease_desc }}</p>
+                </div>
+
+                <h3>🦠 Penyebab</h3>
+
+                <div class="info-box">
+                    <p>{{ disease_cause }}</p>
+                </div>
+
+                <h3>🌱 Rekomendasi Penanganan</h3>
+
+                <div class="info-box">
+                    <p>{{ disease_solution }}</p>
+                </div>
+
+                <a href="/" class="back-btn">
+                    🔍 Prediksi Lagi
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

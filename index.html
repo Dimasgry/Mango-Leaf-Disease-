@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klasifikasi Penyakit Daun Mangga</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-family:'Segoe UI',sans-serif;
+            overflow:hidden;
+            background:linear-gradient(
+                -45deg,
+                #1b5e20,
+                #2e7d32,
+                #43a047,
+                #66bb6a
+            );
+            background-size:400% 400%;
+            animation:gradientMove 10s ease infinite;
+        }
+
+        @keyframes gradientMove{
+            0%{background-position:0% 50%;}
+            50%{background-position:100% 50%;}
+            100%{background-position:0% 50%;}
+        }
+
+        .leaf{
+            position:absolute;
+            font-size:50px;
+            opacity:0.15;
+            animation:floatLeaf 15s linear infinite;
+        }
+
+        .leaf:nth-child(1){
+            left:10%;
+            animation-duration:12s;
+        }
+
+        .leaf:nth-child(2){
+            left:50%;
+            animation-duration:18s;
+        }
+
+        .leaf:nth-child(3){
+            left:80%;
+            animation-duration:15s;
+        }
+
+        @keyframes floatLeaf{
+            from{
+                transform:translateY(110vh) rotate(0deg);
+            }
+            to{
+                transform:translateY(-120px) rotate(360deg);
+            }
+        }
+
+        .card-custom{
+            width:650px;
+            padding:40px;
+            border-radius:30px;
+
+            background:rgba(255,255,255,0.15);
+
+            backdrop-filter:blur(20px);
+            -webkit-backdrop-filter:blur(20px);
+
+            border:1px solid rgba(255,255,255,0.2);
+
+            box-shadow:
+            0 8px 32px rgba(0,0,0,0.2);
+
+            color:white;
+        }
+
+        .logo{
+            text-align:center;
+            font-size:90px;
+            margin-bottom:10px;
+            animation:bounce 3s infinite;
+        }
+
+        @keyframes bounce{
+            0%,100%{
+                transform:translateY(0);
+            }
+            50%{
+                transform:translateY(-10px);
+            }
+        }
+
+        .title{
+            text-align:center;
+            font-weight:700;
+            margin-bottom:10px;
+        }
+
+        .subtitle{
+            text-align:center;
+            opacity:0.9;
+            margin-bottom:30px;
+        }
+
+        .form-control{
+            border-radius:12px;
+            padding:12px;
+        }
+
+        .btn-custom{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:15px;
+            background:#ffffff;
+            color:#2e7d32;
+            font-weight:bold;
+            transition:0.3s;
+        }
+
+        .btn-custom:hover{
+            transform:translateY(-3px);
+            box-shadow:0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .footer{
+            margin-top:20px;
+            text-align:center;
+            opacity:0.8;
+            font-size:14px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="leaf">🍃</div>
+    <div class="leaf">🍃</div>
+    <div class="leaf">🍃</div>
+
+    <div class="card-custom">
+
+        <div class="logo">🌿</div>
+
+        <h2 class="title">
+            Klasifikasi Penyakit Daun Mangga
+        </h2>
+
+        <p class="subtitle">
+            Sistem Deteksi Penyakit Daun Mangga Menggunakan
+            Convolutional Neural Network (CNN)
+        </p>
+
+        <form action="/predict" method="post" enctype="multipart/form-data">
+
+            <div class="mb-3">
+                <label class="form-label">
+                    Upload Gambar Daun Mangga
+                </label>
+
+                <input
+                    type="file"
+                    class="form-control"
+                    name="image"
+                    required>
+            </div>
+
+            <button type="submit" class="btn btn-custom">
+                🔍 Analisis Gambar
+            </button>
+
+        </form>
+
+        <div class="footer">
+            AI-Based Mango Leaf Disease Classification
+        </div>
+
+    </div>
+
+</body>
+</html>
+```
